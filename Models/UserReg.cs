@@ -17,10 +17,8 @@ public class UserReg
     public string LastName { get; set; }
     [Required(ErrorMessage ="Username is required")]
     [MinLength(3, ErrorMessage ="Username must be at least 3 characters")]
-    [MaxLength(15, ErrorMessage ="Username cant be more than 15 characters")]
-    [UniqueUsername]
-    
-    public string Username { get; set; }
+    [UniqueEmail]    
+    public string Email { get; set; }
     [Required]
     [MinLength(8, ErrorMessage ="Password must be at least 8 characters")]
     public string Password { get; set; }
@@ -38,7 +36,7 @@ public class UserReg
 
 
 
-public class UniqueUsernameAttribute : ValidationAttribute
+public class UniqueEmailAttribute : ValidationAttribute
 {
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
@@ -46,16 +44,16 @@ public class UniqueUsernameAttribute : ValidationAttribute
         if (value == null)
         {
 
-            return new ValidationResult("Username is required!");
+            return new ValidationResult("Email is required!");
         }
 
 
         MyContext _context = (MyContext)validationContext.GetService(typeof(MyContext));
 
-        if (_context.Users.Any(e => e.Username == value.ToString()))
+        if (_context.Users.Any(e => e.Email == value.ToString()))
         {
 
-            return new ValidationResult("Username must be unique!");
+            return new ValidationResult("Email must be unique!");
         }
         else
         {
