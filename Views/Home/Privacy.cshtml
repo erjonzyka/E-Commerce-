@@ -1,6 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿<div class="d-flex">
+    <div class="col-6">
+        @await Html.PartialAsync("_NewCategory")
+    </div>
 
-<p>Use this page to detail your site's privacy policy.</p>
+    <div class="col-5">
+        @await Html.PartialAsync("_AllCategories")
+    </div>
+</div>

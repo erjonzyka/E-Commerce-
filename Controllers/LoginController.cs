@@ -41,6 +41,9 @@ public class LoginController : Controller
                 ModelState.AddModelError("LPassword", "Password invalid");
                 return View("Index");
             }
+            if(CurrentUser.Role == 1){
+                HttpContext.Session.SetInt32("AdminId", CurrentUser.id);
+            }
             HttpContext.Session.SetInt32("UserId", CurrentUser.id);
             HttpContext.Session.SetString("UserName", CurrentUser.FirstName);
             return  RedirectToAction("Index", "Home");
@@ -50,6 +53,10 @@ public class LoginController : Controller
         }
     }
 
+    [HttpGet("reg")]
+    public IActionResult PreRegister(){
+        return View();
+    }
 
         [HttpPost("register")]
     public IActionResult Register(UserReg user){

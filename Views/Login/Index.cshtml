@@ -2,39 +2,31 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" media="screen" href="~/css/LoginStyle.css/">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-      <title>Project</title>
 </head>
+
 <body>
-    
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    <form method="post" asp-action="Login" asp-controller="Login">
-        <h3>Login Here</h3>
-
-        <label asp-for="LEmail">Email</label>
-        <input type="text" placeholder="Email" id="username" asp-for="LEmail">
-        <span asp-validation-for="LEmail" class="text-danger"></span>
-
-        <label asp-for="LPassword">Password</label>
-        <input type="password" placeholder="Password" id="password" asp-for="LPassword">
-        <span asp-validation-for="LPassword" class="text-danger"></span>
-
-        <button>Log In</button>
-        <div class="social">
-          <div class="go"><i class="fab fa-google"></i>  Google</div>
-          <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+    <div class="col-6">
+    <h1>Login</h1>
+    <form asp-action="Login" method="post" asp-controller="Login">
+        <div class="form-group">
+            <label asp-for="LEmail">Email</label>
+            <input asp-for="LEmail" class="form-control" id="exampleFormControlInput1" >
+            <span asp-validation-for="LEmail" class="text-danger font-italic mb-3"></span>
         </div>
+        <div class="form-group">
+            <label asp-for="LPassword">Password</label>
+            <input asp-for="LPassword" type="password" class="form-control" id="exampleInputPassword1">
+            <span asp-validation-for="LPassword" class="text-danger font-italic mb-3"></span>
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">Login</button>
+        <a asp-action="PreRegister" asp-controller="Login" class="btn btn-success">Register</a>
     </form>
-
+    </div>
 </body>
+
 </html>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "o6XYahZCubgBZ1nkfza7j/2PAthqzXv/sLiB4hUbKgk=",
+  "Hash": "PKM2OQfeFuhfd2Sd9UYe8vva+Xp/Wp/VtHrNF8WXSBs=",
   "Source": "ProjectNet",
   "BasePath": "_content/ProjectNet",
   "Mode": "Default",
@@ -85,6 +85,23 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\images\\moncler.png",
+      "SourceId": "ProjectNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\",
+      "BasePath": "_content/ProjectNet",
+      "RelativePath": "images/moncler.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\moncler.png"
+    },
+    {
       "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\images\\purple_moon.png",
       "SourceId": "ProjectNet",
       "SourceType": "Discovered",
@@ -100,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\purple_moon.png"
+    },
+    {
+      "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\images\\Zyka-Logo.png",
+      "SourceId": "ProjectNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\",
+      "BasePath": "_content/ProjectNet",
+      "RelativePath": "images/Zyka-Logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Zyka-Logo.png"
     },
     {
       "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\js\\site.js",

@@ -1,0 +1,17 @@
+@model Category
+
+<div class="text-center">
+<h2>Register a category</h2>
+</div>
+
+<form asp-action="RegisterCategory" method="post">
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            >
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+  <input type="submit" value="Register" class="mt-4 btn btn-primary">
+</form>

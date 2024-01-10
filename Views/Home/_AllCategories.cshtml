@@ -1,0 +1,10 @@
+
+
+    <div class="text-center">
+        <h2>All Categories</h2>
+    </div>
+<div class="text-center">
+@foreach(var item in ViewBag.AllCategories){
+    <p><a asp-action="CategoryDetails" asp-route-id="@item.CategoryId">@item.Name</a></p>
+}
+</div>
