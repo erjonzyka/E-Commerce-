@@ -20,6 +20,8 @@ public class Purchase
 
     public Product? Product { get; set; }
     public UserReg? User { get; set; }
+
+    
 }
 
 

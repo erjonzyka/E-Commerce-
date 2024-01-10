@@ -43,6 +43,9 @@ public class LoginController : Controller
             }
             if(CurrentUser.Role == 1){
                 HttpContext.Session.SetInt32("AdminId", CurrentUser.id);
+                HttpContext.Session.SetInt32("UserId", CurrentUser.id);
+                HttpContext.Session.SetString("UserName", CurrentUser.FirstName);
+                return  RedirectToAction("Shop", "Home");
             }
             HttpContext.Session.SetInt32("UserId", CurrentUser.id);
             HttpContext.Session.SetString("UserName", CurrentUser.FirstName);

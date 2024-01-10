@@ -11,7 +11,6 @@ public class Product
     [Key]
     public int ProductId { get; set; }
     [Required(ErrorMessage = "Name is required")]
-    [UniqueProduct]
     public string Name { get; set; }
 
     [Required(ErrorMessage = "Price is required")]
@@ -33,6 +32,7 @@ public class Product
   
     
     public List<Association>? AllAssociations {get;set;}
+    public List<Purchase>? Purchases {get;set;}
 }
 
 

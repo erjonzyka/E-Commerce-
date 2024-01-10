@@ -237,7 +237,59 @@ public async Task<IActionResult> RegisterProduct(Product product)
         UserReg user = _context.Users.Include(e=> e.Purchases).ThenInclude(e=> e.Product).FirstOrDefault(e=> e.id == HttpContext.Session.GetInt32("UserId"));
         return View(user);
     }
+
+    [SessionCheck]
+    [AdminCheck]
+    [HttpGet("delete/{id}")]
+    public IActionResult DeleteItem(int id){
+        Product product = _context.Products.Include(e=> e.AllAssociations).FirstOrDefault(e=>e.ProductId == id);
+        List<Association> association = _context.Associations.Where(e => e.ProductId == id).ToList();
+        _context.RemoveRange(association);
+        _context.Remove(product);
+        _context.SaveChanges();
+        return RedirectToAction("Shop");
+    }
+
+    [SessionCheck]
+    [AdminCheck]
+    [HttpGet("item/edit/{id}")]
+    public IActionResult EditItem(int id)
+    {
+        Product? product = _context.Products.FirstOrDefault(e => e.ProductId == id);
+        return View(product);
+    }
+
+
+    [SessionCheck]
+    [HttpPost("item/post/edit/{id}")]
+    public IActionResult EditProduct(Product productt, int id)
+{
+    if (ModelState.IsValid)
+    {
+        Product productFromDb = _context.Products.FirstOrDefault(e => e.ProductId == id);
+        productFromDb.Name = productt.Name;
+        productFromDb.Price = productt.Price;
+        productFromDb.Quantity = productt.Quantity;
+        productFromDb.Description = productt.Description;
+        productFromDb.UpdatedAt = DateTime.Now;
+        _context.SaveChanges();
+        return RedirectToAction("Shop");
+    }
+    else
+    {
+        Product? product = _context.Products.FirstOrDefault(e => e.ProductId == id);
+        return View("EditItem", product);
+    }
 }
+
+
+
+
+}
+
+
+
+
 
 
 public class SessionCheckAttribute : ActionFilterAttribute
