@@ -1,8 +1,4 @@
-﻿<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-
-function confirmPurchase() {
+﻿function confirmPurchase() {
     Swal.fire({
         title: 'Are you sure?',
         text: 'Are you sure you want to purchase this product?',
@@ -14,9 +10,15 @@ function confirmPurchase() {
     }).then((result) => {
         if (result.isConfirmed) {
             // If user confirms, submit the form
-            document.getElementById('purchaseForm').submit();
+            var purchaseForm = document.getElementById('purchaseForm');
+            if (purchaseForm) {
+                purchaseForm.submit();
+            } else {
+                console.error('Form with ID "purchaseForm" not found.');
+            }
         }
     });
 }
+
     // If user cancels, do nothing (form won't be submitted)
 
