@@ -15,12 +15,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\zykae\OneDrive\Documents\Projekti\ProjectNet
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Home/CategoryDetails.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDYXRlZ29yeURldGFpbHMuY3NodG1s
+[C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Admin/EditItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdEl0ZW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Home/EditItem.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZGl0SXRlbS5jc2h0bWw=
+[C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Admin/NewProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3UHJvZHVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Home/Index.cshtml]
@@ -33,10 +37,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Home/MyProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNeVByb2ZpbGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Home/NewProduct.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOZXdQcm9kdWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Home/Privacy.cshtml]
@@ -53,10 +53,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Home/_AllCategories.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfQWxsQ2F0ZWdvcmllcy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Home/_Banner.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfQmFubmVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zykae/OneDrive/Documents/Projekti/ProjectNet/Views/Home/_NewCategory.cshtml]

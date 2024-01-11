@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PKM2OQfeFuhfd2Sd9UYe8vva+Xp/Wp/VtHrNF8WXSBs=",
+  "Hash": "KslbwlgWToKxjHrsDrtdI0lYLHUCWyehYCNYbokndgs=",
   "Source": "ProjectNet",
   "BasePath": "_content/ProjectNet",
   "Mode": "Default",
@@ -1120,6 +1120,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\uploads\\1040db41-e128-4448-9ede-7800d5540271_download.jpg",
+      "SourceId": "ProjectNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\",
+      "BasePath": "_content/ProjectNet",
+      "RelativePath": "uploads/1040db41-e128-4448-9ede-7800d5540271_download.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\1040db41-e128-4448-9ede-7800d5540271_download.jpg"
     }
   ]
 }

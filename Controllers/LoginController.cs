@@ -4,7 +4,7 @@ using ProjectNet.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
-namespace ExamCS.Controllers;
+namespace ProjectNet.Controllers;
 
 public class LoginController : Controller
 {    
@@ -45,7 +45,7 @@ public class LoginController : Controller
                 HttpContext.Session.SetInt32("AdminId", CurrentUser.id);
                 HttpContext.Session.SetInt32("UserId", CurrentUser.id);
                 HttpContext.Session.SetString("UserName", CurrentUser.FirstName);
-                return  RedirectToAction("Shop", "Home");
+                return  RedirectToAction("Index", "Admin");
             }
             HttpContext.Session.SetInt32("UserId", CurrentUser.id);
             HttpContext.Session.SetString("UserName", CurrentUser.FirstName);

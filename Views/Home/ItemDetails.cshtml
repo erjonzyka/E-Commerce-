@@ -2,13 +2,7 @@
 @using Microsoft.AspNetCore.Http
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Your head content -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body>
+<div>
     <div class="col-8">
         <h1>@Model.Product.Name</h1>
         <h3>Price: @Model.Product.Price</h3>
@@ -27,23 +21,5 @@
         </form>
     </div>
 
-    <script>
-        function confirmPurchase() {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'Are you sure you want to purchase this product?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, buy it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Submit the form
-                    document.getElementById('purchaseForm').submit();
-                }
-            });
-        }
-    </script>
-</body>
-</html>
+</div>
+

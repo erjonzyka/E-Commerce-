@@ -53,43 +53,6 @@ public class HomeController : Controller
         return View();
     }
 
-    [AdminCheck]
-    [HttpGet("newproduct")]
-    public IActionResult NewProduct()
-    {
-        return View();
-    }
-
-    [AdminCheck]
-    [HttpPost("registerproduct")]
-public async Task<IActionResult> RegisterProduct(Product product)
-{
-    if (ModelState.IsValid)
-    {
-        if (product.ImageFile != null && product.ImageFile.Length > 0)
-        {
-            // Process the uploaded file
-            var uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads");
-            var uniqueFileName = Guid.NewGuid().ToString() + "_" + product.ImageFile.FileName;
-            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await product.ImageFile.CopyToAsync(fileStream);
-            }
-
-            // Update the model properties with the file details
-            product.ImageFileName = uniqueFileName;
-            product.ImageData = System.IO.File.ReadAllBytes(filePath);
-        }
-        _context.Add(product);
-        _context.SaveChanges();
-        return RedirectToAction("Index");
-    }
-    ViewBag.AllProducts = _context.Products.ToList();
-    return View("Index", product);
-}
-
 
     [AdminCheck]
     [HttpPost("registercategory")]
@@ -136,14 +99,7 @@ public async Task<IActionResult> RegisterProduct(Product product)
     }
 
 
-    [HttpGet("category/details/{id}")]
-    public IActionResult CategoryDetails(int id)
-    {
-        ViewBag.category = _context.Categories.Include(e => e.AllAssociations).ThenInclude(f => f.product).FirstOrDefault(s => s.CategoryId == id);
-        ViewBag.Products = _context.Products.ToList();
-
-        return View();
-    }
+    
 
     [HttpPost("category/addproduct/{id}")]
     public IActionResult AddCategoryProduct(Association a, int id)
@@ -238,52 +194,7 @@ public async Task<IActionResult> RegisterProduct(Product product)
         return View(user);
     }
 
-    [SessionCheck]
-    [AdminCheck]
-    [HttpGet("delete/{id}")]
-    public IActionResult DeleteItem(int id){
-        Product product = _context.Products.Include(e=> e.AllAssociations).FirstOrDefault(e=>e.ProductId == id);
-        List<Association> association = _context.Associations.Where(e => e.ProductId == id).ToList();
-        _context.RemoveRange(association);
-        _context.Remove(product);
-        _context.SaveChanges();
-        return RedirectToAction("Shop");
-    }
-
-    [SessionCheck]
-    [AdminCheck]
-    [HttpGet("item/edit/{id}")]
-    public IActionResult EditItem(int id)
-    {
-        Product? product = _context.Products.FirstOrDefault(e => e.ProductId == id);
-        return View(product);
-    }
-
-
-    [SessionCheck]
-    [HttpPost("item/post/edit/{id}")]
-    public IActionResult EditProduct(Product productt, int id)
-{
-    if (ModelState.IsValid)
-    {
-        Product productFromDb = _context.Products.FirstOrDefault(e => e.ProductId == id);
-        productFromDb.Name = productt.Name;
-        productFromDb.Price = productt.Price;
-        productFromDb.Quantity = productt.Quantity;
-        productFromDb.Description = productt.Description;
-        productFromDb.UpdatedAt = DateTime.Now;
-        _context.SaveChanges();
-        return RedirectToAction("Shop");
-    }
-    else
-    {
-        Product? product = _context.Products.FirstOrDefault(e => e.ProductId == id);
-        return View("EditItem", product);
-    }
-}
-
-
-
+    
 
 }
 

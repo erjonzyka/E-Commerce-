@@ -4,7 +4,7 @@
 <h2>Register a product</h2>
 </div>
 
-<form asp-action="RegisterProduct" method="post">
+<form asp-action="RegisterProduct" method="post" enctype="multipart/form-data" asp-controller="Admin">
 
     <div class="form-group">
         <label asp-for="Name"></label>
@@ -28,7 +28,7 @@
   </div>
   <div class="form-group">
         <label asp-for="ImageFile" class="control-label"></label>
-        <input asp-for="ImageFile" type="file" class="form-control" />
+        <input asp-for="ImageFile" class="form-control" type="file">
         <span asp-validation-for="ImageFile" class="text-danger"></span>
     </div>
   <input type="submit" value="Register" class="mt-4 btn btn-primary">
