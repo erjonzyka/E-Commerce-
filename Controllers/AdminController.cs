@@ -41,7 +41,9 @@ public class AdminController : Controller
     [HttpGet("newproduct")]
     public IActionResult NewProduct()
     {
-        return View();
+        DataTwo DataTwo = new DataTwo();
+        DataTwo.Categories= _context.Categories.ToList();
+        return View(DataTwo);
     }
     
     [AdminCheck]
@@ -67,12 +69,21 @@ public class AdminController : Controller
             product.ImageFileName = uniqueFileName;
             product.ImageData = System.IO.File.ReadAllBytes(filePath);
         }
-        _context.Add(product);
-        _context.SaveChanges();
-        return RedirectToAction("Index");
-    }
-    ViewBag.AllProducts = _context.Products.ToList();
-    return View("Index", product);
+            _context.Products.Add(product);
+            _context.SaveChanges();
+            Association association = new Association();
+             association.ProductId = product.ProductId;
+            association.CategoryId = product.CategoryId;
+            _context.Associations.Add(association);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+           }
+   
+         ViewBag.AllProducts = _context.Products.ToList();
+        DataTwo DataTwo = new DataTwo();
+        DataTwo.Categories= _context.Categories.ToList();
+        return View("NewProduct", DataTwo);
+
 }
 
     [SessionCheck]
@@ -81,7 +92,6 @@ public class AdminController : Controller
     public IActionResult DeleteItem(int id){
         Product product = _context.Products.Include(e=> e.AllAssociations).FirstOrDefault(e=>e.ProductId == id);
         List<Association> association = _context.Associations.Where(e => e.ProductId == id).ToList();
-        _context.RemoveRange(association);
         _context.Remove(product);
         _context.SaveChanges();
         return RedirectToAction("Index");
@@ -118,6 +128,22 @@ public class AdminController : Controller
         return View("EditItem", product);
     }
 }
+
+[AdminCheck]
+    [HttpPost("registercategory")]
+    public IActionResult RegisterCategory(Category category)
+    {
+        if (ModelState.IsValid)
+        {
+            _context.Add(category);
+            _context.SaveChanges();
+            return RedirectToAction("NewProduct");
+        }
+        ViewBag.AllCategories = _context.Categories.ToList();
+        DataTwo DataTwo = new DataTwo();
+        DataTwo.Categories= _context.Categories.ToList();
+        return View("NewProduct",DataTwo);
+    }
 
 
 

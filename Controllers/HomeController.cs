@@ -54,19 +54,7 @@ public class HomeController : Controller
     }
 
 
-    [AdminCheck]
-    [HttpPost("registercategory")]
-    public IActionResult RegisterCategory(Category category)
-    {
-        if (ModelState.IsValid)
-        {
-            _context.Add(category);
-            _context.SaveChanges();
-            return RedirectToAction("Privacy");
-        }
-        ViewBag.AllCategories = _context.Categories.ToList();
-        return View("Privacy");
-    }
+    
 
 
 

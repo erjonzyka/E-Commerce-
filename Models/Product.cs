@@ -13,6 +13,9 @@ public class Product
     [Required(ErrorMessage = "Name is required")]
     public string Name { get; set; }
 
+    [Required(ErrorMessage = "Name is required")]
+    public string Brand {get;set; }
+
     [Required(ErrorMessage = "Price is required")]
     public int Price { get; set; }
 
@@ -22,6 +25,8 @@ public class Product
     public string? Description { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+    public int? CategoryId { get; set; }
 
     public string? ImageFileName { get; set; } 
         public byte[]? ImageData { get; set; } 
@@ -33,6 +38,7 @@ public class Product
     
     public List<Association>? AllAssociations {get;set;}
     public List<Purchase>? Purchases {get;set;}
+    public Category? Category;
 }
 
 
