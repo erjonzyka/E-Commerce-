@@ -39,12 +39,27 @@ public class HomeController : Controller
         return RedirectToAction("Index", "Login");
     }
 
-    [SessionCheck]
+    
     [HttpGet("shop")]
     public IActionResult Shop()
     {
+        DataOne data = new DataOne();
         List<Product>AllProducts = _context.Products.Include(e=> e.AllAssociations).ThenInclude(e=> e.category).ToList();
-        return View(AllProducts);
+        List<Category> AllCategories = _context.Categories.Include(e=> e.AllAssociations).Where(e=> e.AllAssociations.Count!=0).ToList();
+        data.AllProducts = AllProducts;
+        data.AllCategories = AllCategories;
+        return View(data);
+    }
+
+    [HttpGet("shop/{id}")]
+    public IActionResult ShopByCategory(int id)
+    {
+        DataOne data = new DataOne();
+        List<Product>AllProducts = _context.Products.Include(e=> e.AllAssociations).Where(e => e.AllAssociations.Any(e => e.CategoryId == id)).ToList();
+        List<Category> AllCategories = _context.Categories.Include(e=> e.AllAssociations).Where(e=> e.AllAssociations.Count!=0).ToList();
+        data.AllProducts = AllProducts;
+        data.AllCategories = AllCategories;
+        return View("Shop",data);
     }
 
     public IActionResult Privacy()

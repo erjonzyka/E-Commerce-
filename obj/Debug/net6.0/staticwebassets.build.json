@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mJnyUHX68CT+VqUblHnu3iGGvjxpsKRJNOt9AMBy6Lo=",
+  "Hash": "rPMt0PxJ2Zr0HQEDe8cWF1l1dKLg1XmyyLewXGva5Z0=",
   "Source": "ProjectNet",
   "BasePath": "_content/ProjectNet",
   "Mode": "Default",
@@ -1426,6 +1426,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\a592f012-feb9-47a0-ba28-b1aff5ae2ed1_download.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\uploads\\a79754f4-82da-409a-8c16-4fb8273b4042_wireframe.jpg",
+      "SourceId": "ProjectNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\",
+      "BasePath": "_content/ProjectNet",
+      "RelativePath": "uploads/a79754f4-82da-409a-8c16-4fb8273b4042_wireframe.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\a79754f4-82da-409a-8c16-4fb8273b4042_wireframe.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\uploads\\a8897c82-9a32-4e45-8ebe-d78eba5b00b8_download.jpg",
+      "SourceId": "ProjectNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\",
+      "BasePath": "_content/ProjectNet",
+      "RelativePath": "uploads/a8897c82-9a32-4e45-8ebe-d78eba5b00b8_download.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\a8897c82-9a32-4e45-8ebe-d78eba5b00b8_download.jpg"
     },
     {
       "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\uploads\\aa25a088-4034-4c9b-bffa-29b0c49020bf_download.jpg",
