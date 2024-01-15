@@ -73,7 +73,7 @@ public class LoginController : Controller
             return RedirectToAction("Index", "Home");
         }
         else{
-            return View("Index");
+            return View("PreRegister");
         }
     }
 

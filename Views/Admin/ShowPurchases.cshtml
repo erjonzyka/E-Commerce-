@@ -1,0 +1,50 @@
+@model PaginatedProductViewModel
+
+<!-- Your existing table code -->
+<table class="table  table-dark table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">User</th>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Purchases)
+        {
+            if(item!=null){
+            <tr>
+                <th scope="row">@item.PurchaseId</th>
+                <td>@item.User.FirstName @item.User.LastName</td>
+                <td>@item.Product.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.Total</td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<!-- Pagination links -->
+<div class="pagination">
+   <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+            <a class="page-link bg-dark" href="@Url.Action("ShowPurchases", new { page = Model.PageNumber - 1 })" tabindex="-1">Previous</a>
+        </li>
+        
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                <a class="page-link bg-dark" href="@Url.Action("ShowPurchases", new { page = i })">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+            <a class="page-link bg-dark" href="@Url.Action("ShowPurchases", new { page = Model.PageNumber + 1})">Next</a>
+        </li>
+    </ul>
+</nav>
+</div>

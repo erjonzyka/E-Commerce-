@@ -16,19 +16,19 @@
         <div class="form-group">
             <label asp-for="@Model.Product.Brand"></label>
             <input asp-for="@Model.Product.Brand" class="form-control bg-black text-white" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
+                aria-describedby="emailHelp" min="1">
             <span asp-validation-for="@Model.Product.Brand" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="@Model.Product.Price"></label>
             <input asp-for="@Model.Product.Price" class="form-control bg-black text-white" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
+                aria-describedby="emailHelp" min="1">
             <span asp-validation-for="@Model.Product.Price" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="@Model.Product.Quantity"></label>
             <input asp-for="@Model.Product.Quantity" class="form-control bg-black text-white" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
+                aria-describedby="emailHelp" min="1">
             <span asp-validation-for="@Model.Product.Quantity" class="text-danger"></span>
         </div>
         <div class="form-group">

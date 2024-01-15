@@ -29,12 +29,36 @@ public class AdminController : Controller
     }
 
     [SessionCheck]
-    [AdminCheck]
-    public IActionResult Index()
+[AdminCheck]
+public IActionResult Index(int page = 1)
+{
+    int pageSize = 10; // Number of items to display per page
+
+    // Retrieve the products with associated categories
+    IQueryable<Product> productsQuery = _context.Products.Include(e => e.AllAssociations).ThenInclude(e=> e.category).Include(e=>e.Purchases).OrderByDescending(e => e.Purchases.Count());;
+
+    
+
+    // Pagination
+    var totalProducts = productsQuery.Count();
+    var totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+
+    // Ensure the requested page is within the valid range
+    page = Math.Max(1, Math.Min(page, totalPages));
+
+    // Apply pagination to the query
+    var products = productsQuery.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+    // Pass the paginated and sorted data to the view
+    var viewModel = new PaginatedProductViewModel
     {
-        List<Product>AllProducts = _context.Products.Include(e=> e.AllAssociations).ThenInclude(e=> e.category).ToList();
-        return View(AllProducts);
-    }
+        Products = products,
+        PageNumber = page,
+        TotalPages = totalPages,
+    };
+
+    return View(viewModel);
+}
 
 
     [AdminCheck]
@@ -87,46 +111,70 @@ public class AdminController : Controller
 }
 
     [SessionCheck]
-    [AdminCheck]
-    [HttpGet("delete/{id}")]
-    public IActionResult DeleteItem(int id){
-        Product product = _context.Products.Include(e=> e.AllAssociations).FirstOrDefault(e=>e.ProductId == id);
-        List<Association> association = _context.Associations.Where(e => e.ProductId == id).ToList();
-        _context.Remove(product);
-        _context.SaveChanges();
-        return RedirectToAction("Index");
-    }
+[AdminCheck]
+[HttpGet("delete/{id}")]
+public IActionResult DeleteItem(int id)
+{
+    Product product = _context.Products.Include(e => e.AllAssociations).FirstOrDefault(e => e.ProductId == id);
+    List<Association> associations = _context.Associations.Where(e => e.ProductId == id).ToList();
+    List<Purchase> purchases = _context.Purchases.Where(p => p.ProductId == id).ToList();
+    _context.Purchases.RemoveRange(purchases);
+    _context.Associations.RemoveRange(associations);
+    
+    _context.Products.Remove(product);
+
+    _context.SaveChanges();
+
+    return RedirectToAction("Index");
+}
 
     [SessionCheck]
     [AdminCheck]
     [HttpGet("item/edit/{id}")]
     public IActionResult EditItem(int id)
     {
-        Product? product = _context.Products.FirstOrDefault(e => e.ProductId == id);
-        return View(product);
+        DataTwo DataTwo = new DataTwo();
+        DataTwo.Categories= _context.Categories.ToList();
+        DataTwo.Product = _context.Products.FirstOrDefault(e => e.ProductId == id);
+        return View(DataTwo);
     }
 
 
     [SessionCheck]
     [HttpPost("item/post/edit/{id}")]
-    public IActionResult EditProduct(Product productt, int id)
+
+public IActionResult EditProduct(Product productt, int id)
 {
     if (ModelState.IsValid)
     {
-        Product productFromDb = _context.Products.FirstOrDefault(e => e.ProductId == id);
-        productFromDb.Name = productt.Name;
-        productFromDb.Price = productt.Price;
-        productFromDb.Quantity = productt.Quantity;
-        productFromDb.Description = productt.Description;
-        productFromDb.UpdatedAt = DateTime.Now;
-        _context.SaveChanges();
-        return RedirectToAction("Shop");
+        // Find the product from the database
+        Product productFromDb = _context.Products.Include(e => e.AllAssociations)
+                                                .ThenInclude(e => e.category)
+                                                .FirstOrDefault(e => e.ProductId == id);
+
+        
+            // Update product properties
+            productFromDb.Name = productt.Name;
+            productFromDb.Brand = productt.Brand;
+            productFromDb.Price = productt.Price;
+            productFromDb.Quantity = productt.Quantity;
+            productFromDb.Description = productt.Description;
+            productFromDb.UpdatedAt = DateTime.Now;
+
+            Association assoc = productFromDb.AllAssociations.FirstOrDefault(e=> e.ProductId == productt.ProductId);
+                assoc.CategoryId = productt.CategoryId;
+            _context.SaveChanges();
+
+            return RedirectToAction("Shop");
+        
     }
-    else
-    {
-        Product? product = _context.Products.FirstOrDefault(e => e.ProductId == id);
-        return View("EditItem", product);
-    }
+
+    // If ModelState is not valid or if the product is not found
+    DataTwo dataTwo = new DataTwo();
+    dataTwo.Categories = _context.Categories.ToList();
+    dataTwo.Product = productt;
+
+    return View("EditItem", dataTwo);
 }
 
 [AdminCheck]
@@ -145,7 +193,68 @@ public class AdminController : Controller
         return View("NewProduct",DataTwo);
     }
 
+    [AdminCheck]
+[HttpGet("showusers")]
+public IActionResult ShowUsers(int page = 1)
+{
+    int pageSize = 10; // Number of items to display per page
 
+    // Retrieve the users ordered by points
+    IQueryable<UserReg> usersQuery = _context.Users.OrderByDescending(e => e.Points);
+
+    // Pagination
+    var totalUsers = usersQuery.Count();
+    var totalPages = (int)Math.Ceiling((double)totalUsers / pageSize);
+
+    // Ensure the requested page is within the valid range
+    page = Math.Max(1, Math.Min(page, totalPages));
+
+    // Apply pagination to the query
+    var users = usersQuery.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+    // Pass the paginated data to the view
+    var viewModel = new PaginatedProductViewModel
+    {
+        Users = users,
+        PageNumber = page,
+        TotalPages = totalPages,
+    };
+
+    return View(viewModel);
+}
+
+
+
+[AdminCheck]
+[HttpGet("showpurchases")]
+public IActionResult ShowPurchases(int page = 1)
+{
+    int pageSize = 10; // Number of items to display per page
+
+    // Retrieve the purchases with associated products and users
+    IQueryable<Purchase> purchasesQuery = _context.Purchases.Include(e => e.Product).Include(e => e.User).OrderByDescending(e => e.PurchaseId);
+
+    // Pagination
+    var totalPurchases = purchasesQuery.Count();
+    var totalPages = (int)Math.Ceiling((double)totalPurchases / pageSize);
+
+    // Ensure the requested page is within the valid range
+    page = Math.Max(1, Math.Min(page, totalPages));
+
+    // Apply pagination to the query
+    var purchases = purchasesQuery.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+
+    // Pass the paginated data to the view
+    var viewModel = new PaginatedProductViewModel
+    {
+        Purchases = purchases,
+        PageNumber = page,
+        TotalPages = totalPages,
+    };
+
+    return View(viewModel);
+}
 
 
 }
