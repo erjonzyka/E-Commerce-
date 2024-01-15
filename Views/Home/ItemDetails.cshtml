@@ -5,23 +5,24 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="path/to/purchase.js"></script>
 
-<div>
-    <div class="col-8">
+<div class="d-flex justify-content-around">
+    <div class="col-6">
         <img class="card-img-top" src="~/uploads/@Model.Product.ImageFileName" alt="Card image cap">
+    </div>
+    <div class="col-5">
         <h1>@Model.Product.Name</h1>
         <h3>Price: @Model.Product.Price</h3>
+        <h3>Description: </h3>
         <p>@Model.Product.Description</p>
-    </div>
-    <div class="col-4">
         <form asp-action="Purchase" method="post" asp-route-id="@Model.Product.ProductId" id="purchaseForm">
             <input type="hidden" value="@Model.Product.ProductId" asp-for="@Model.Purchase.ProductId">
             <input type="hidden" value="@HttpContextAccessor.HttpContext.Session.GetInt32("UserId")" asp-for="@Model.Purchase.UserId">
             <div class="form-group">
                 <label asp-for="@Model.Purchase.Quantity"></label>
-                <input asp-for="@Model.Purchase.Quantity" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" min="1">
+                <input asp-for="@Model.Purchase.Quantity" class="form-control bg-dark text-white" id="quantityInput" aria-describedby="emailHelp" min="1">
                 <span asp-validation-for="@Model.Purchase.Quantity" class="text-danger"></span>
             </div>
-            <button type="button" class="btn btn-success" onclick="confirmPurchase()">Buy</button>
+            <button type="button" class="mt-4 btn btn-success w-100 p-3" onclick="confirmPurchase(@Model.Product.Quantity)">Buy</button>
         </form>
     </div>
 
