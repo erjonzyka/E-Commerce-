@@ -2,40 +2,53 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile</title>
 </head>
+
 <body>
-    <h1 class="text-center">Account Details</h1>
+
+  <h1 class="text-center text-white">Account Details</h1>
+  <section id="page-header">
+
+            <h2>#shopwithus</h2>
+            <p>Collect Points to win prizes!</p>
+        </section>
+  <div class="d-flex justify-content-between">
     <div class="col-6">
-    <h2>Name : @Model.FirstName @Model.LastName </h2>
-    <p>Points : @Model.Points</p>
-
-    <h2>Your purchases: </h2>
-    <table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Product Name</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Total Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach(var item in @Model.Purchases){
-    <tr>
-      <th scope="row">@item.PurchaseId</th>
-      <td>@item.Product.Name</td>
-      <td>@item.Quantity</td>
-      <td>@item.Total</td>
-    </tr>
-    }
-  </tbody>
-</table>
-
-    
+      <h2 class="text-white">Name : @Model.FirstName @Model.LastName </h2>
+      <p class="text-white">Points : @Model.Points</p>
     </div>
+    <div class="col-5">
+      <h2 class="text-white">Your purchases: </h2>
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in @Model.Purchases)
+          {
+            <tr>
+              <th scope="row">@item.PurchaseId</th>
+              <td>@item.Product.Name</td>
+              <td>@item.Quantity</td>
+              <td>@item.Total</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+
 </body>
+
 </html>

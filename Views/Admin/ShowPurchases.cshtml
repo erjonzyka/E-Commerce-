@@ -7,6 +7,7 @@
             <th scope="col">#</th>
             <th scope="col">User</th>
             <th scope="col">Product</th>
+            <th scope="col"></th>
             <th scope="col">Quantity</th>
             <th scope="col">Total</th>
         </tr>
@@ -19,6 +20,7 @@
                 <th scope="row">@item.PurchaseId</th>
                 <td>@item.User.FirstName @item.User.LastName</td>
                 <td>@item.Product.Name</td>
+                <td class="text-center"><img src="~/uploads/@item.Product.ImageFileName" alt="Card image cap" class="s-logo"></td>
                 <td>@item.Quantity</td>
                 <td>@item.Total</td>
             </tr>

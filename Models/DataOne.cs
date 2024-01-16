@@ -12,5 +12,10 @@ public class DataOne{
     public Purchase? Purchase {get;set;}
 
 
+    public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
+        public string SortField { get; set; }
+  
+
     
 }

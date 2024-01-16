@@ -40,7 +40,7 @@ public class Product
     
     public List<Association>? AllAssociations {get;set;}
     public List<Purchase>? Purchases {get;set;}
-    public Category? Category;
+    public List<Cart>? Carts {get;set;}
 }
 
 

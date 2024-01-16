@@ -1,6 +1,9 @@
-﻿function confirmPurchase(qty) {
+﻿function confirmPurchase(qty, event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
     var inputQuantity = document.querySelector('#quantityInput');
-    
+
     // Parse the input value as an integer
     var inputValue = parseInt(inputQuantity.value);
 
@@ -26,13 +29,21 @@
             confirmButtonText: 'Yes, buy it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                // If user confirms, submit the form
-                var purchaseForm = document.getElementById('purchaseForm');
-                if (purchaseForm) {
-                    purchaseForm.submit();
-                } else {
-                    console.error('Form with ID "purchaseForm" not found.');
-                }
+                // Delay the form submission until after Swal.fire is complete
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Order Confirmation!',
+                    text: 'Thank you for your order.',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    var purchaseForm = document.getElementById('purchaseForm');
+                    if (purchaseForm) {
+                        purchaseForm.submit();
+                    } else {
+                        console.error('Form with ID "purchaseForm" not found.');
+                    }
+                });
             }
         });
     }

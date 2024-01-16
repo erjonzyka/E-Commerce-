@@ -36,6 +36,7 @@ public class UserReg
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
     public List<Purchase>? Purchases {get;set;}
+    public List<Cart>? Carts {get;set;}
 }
 
 

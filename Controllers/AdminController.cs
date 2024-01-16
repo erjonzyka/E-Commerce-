@@ -139,43 +139,73 @@ public IActionResult DeleteItem(int id)
         return View(DataTwo);
     }
 
-
-    [SessionCheck]
-    [HttpPost("item/post/edit/{id}")]
-
-public IActionResult EditProduct(Product productt, int id)
+[SessionCheck]
+[AdminCheck]
+[HttpPost("item/postedit/{id}")]
+public async Task<IActionResult> EditProduct(DataTwo data, int id)
 {
+    if (data.Product == null)
+    {
+        // Handle the case where dataTwo is null, maybe return NotFound() or redirect to an error page
+        Console.WriteLine("futja kot");
+    }
     if (ModelState.IsValid)
     {
-        // Find the product from the database
-        Product productFromDb = _context.Products.Include(e => e.AllAssociations)
-                                                .ThenInclude(e => e.category)
-                                                .FirstOrDefault(e => e.ProductId == id);
+        // Find the product from the database with associations
+        Product productFromDb = _context.Products.Include(e => e.AllAssociations).ThenInclude(e => e.category).FirstOrDefault(e => e.ProductId == id);
 
-        
-            // Update product properties
-            productFromDb.Name = productt.Name;
-            productFromDb.Brand = productt.Brand;
-            productFromDb.Price = productt.Price;
-            productFromDb.Quantity = productt.Quantity;
-            productFromDb.Description = productt.Description;
-            productFromDb.UpdatedAt = DateTime.Now;
+        // Update product properties
+        productFromDb.Name = data.Product.Name;
+        productFromDb.Brand = data.Product.Brand;
+        productFromDb.Price = data.Product.Price;
+        productFromDb.Quantity = data.Product.Quantity;
+        productFromDb.Description = data.Product.Description;
+        productFromDb.UpdatedAt = DateTime.Now;
 
-            Association assoc = productFromDb.AllAssociations.FirstOrDefault(e=> e.ProductId == productt.ProductId);
-                assoc.CategoryId = productt.CategoryId;
-            _context.SaveChanges();
+        // Update association properties
+        Association assoc = productFromDb.AllAssociations.FirstOrDefault(e => e.ProductId == productFromDb.ProductId);
+        if (assoc != null)
+        {
+            assoc.CategoryId = data.Product.CategoryId;
+        }
+        else
+        {
+            // If no association exists, create a new one
+            Association newAssociation = new Association
+            {
+                ProductId = productFromDb.ProductId,
+                CategoryId = data.Product.CategoryId
+            };
+            productFromDb.AllAssociations.Add(newAssociation);
+        }
 
-            return RedirectToAction("Shop");
-        
+        // Check if a new image file is uploaded
+        if (data.Product.ImageFile != null && data.Product.ImageFile.Length > 0)
+        {
+            var uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads");
+            var uniqueFileName = Guid.NewGuid().ToString() + "_" + data.Product.ImageFile.FileName;
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await data.Product.ImageFile.CopyToAsync(fileStream);
+            }
+
+            // Update the model properties with the file details
+            productFromDb.ImageFileName = uniqueFileName;
+            productFromDb.ImageData = await System.IO.File.ReadAllBytesAsync(filePath);
+        }
+
+        await _context.SaveChangesAsync(); // Use async version
+
+        return RedirectToAction("Index");
     }
 
-    // If ModelState is not valid or if the product is not found
-    DataTwo dataTwo = new DataTwo();
-    dataTwo.Categories = _context.Categories.ToList();
-    dataTwo.Product = productt;
-
-    return View("EditItem", dataTwo);
+    // If ModelState is not valid, reload the view with the existing data for correction
+    data.Categories= _context.Categories.ToList();
+    return View("EditItem", data);
 }
+
 
 [AdminCheck]
     [HttpPost("registercategory")]
