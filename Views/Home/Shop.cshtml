@@ -1,4 +1,4 @@
-﻿@model DataOne
+﻿@model PaginatedProductViewModel
 @using Microsoft.AspNetCore.Http
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
@@ -33,7 +33,7 @@
         </section>
     
     <div class="container">
-        @foreach (var item in Model.AllProducts)
+        @foreach (var item in Model.Products)
         {
             <div class="d-inline-flex p-4" >
             <div class="card text-white bg-dark" style="width: 15rem;">
@@ -54,6 +54,28 @@
         </div>
         }
     </div>    
+
+      <div class="pagination">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                    <a class="page-link bg-dark" href="@Url.Action("Shop", new { page = Model.PageNumber - 1 })" tabindex="-1">Previous</a>
+                </li>
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                        <a class="page-link bg-dark" href="@Url.Action("Shop", new { page = i })">@i</a>
+                    </li>
+                }
+
+                <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link bg-dark" href="@Url.Action("Shop", new { page = Model.PageNumber + 1})">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
 </body>
 
 </html>

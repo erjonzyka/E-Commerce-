@@ -41,15 +41,36 @@ public class HomeController : Controller
 
     
     [HttpGet("shop")]
-    public IActionResult Shop()
+public IActionResult Shop(int page = 1)
+{
+    int pageSize = 10; // Number of items to display per page
+
+    // Retrieve the products with associated categories
+    List<Product> allProducts = _context.Products.Include(e => e.AllAssociations).ThenInclude(e => e.category).ToList();
+    // Pagination
+    var totalProducts = allProducts.Count();
+    var totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+
+    // Ensure the requested page is within the valid range
+    page = Math.Max(1, Math.Min(page, totalPages));
+
+    // Apply pagination to the query
+    var products = allProducts.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+    // Retrieve all categories
+    List<Category> allCategories = _context.Categories.Include(e => e.AllAssociations).Where(e => e.AllAssociations.Count != 0).ToList();
+
+    // Pass the paginated and sorted data to the view
+    var viewModel = new PaginatedProductViewModel
     {
-        DataOne data = new DataOne();
-        List<Product>AllProducts = _context.Products.Include(e=> e.AllAssociations).ThenInclude(e=> e.category).ToList();
-        List<Category> AllCategories = _context.Categories.Include(e=> e.AllAssociations).Where(e=> e.AllAssociations.Count!=0).ToList();
-        data.AllProducts = AllProducts;
-        data.AllCategories = AllCategories;
-        return View(data);
-    }
+        Products = products,
+        PageNumber = page,
+        TotalPages = totalPages,
+        AllCategories = allCategories
+    };
+
+    return View(viewModel);
+}
 
     [HttpGet("shop/{id}")]
     public IActionResult ShopByCategory(int id)

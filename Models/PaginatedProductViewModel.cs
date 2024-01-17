@@ -8,6 +8,7 @@ public class PaginatedProductViewModel
     public List<Product> Products { get; set; }
     public List<UserReg> Users {get;set;}
     public List<Purchase> Purchases {get;set;}
+    public List<Category> AllCategories {get;set;}
     public int PageNumber { get; set; }
     public int TotalPages { get; set; }
 }
