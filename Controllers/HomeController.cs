@@ -154,6 +154,51 @@ public class HomeController : Controller
     }
 
 
+    [SessionCheck]
+    [HttpGet("cart/remove/{id}")]
+    public IActionResult RemoveFromCart(int id)
+    {
+        Cart? cart = _context.Carts.FirstOrDefault(e=> e.CartId == id);
+        Product? product = _context.Products.FirstOrDefault(e=> e.ProductId == cart.ProductId);
+        product.Quantity += cart.Quantity;
+        _context.Remove(cart);
+        _context.SaveChanges();
+        int? currentCartNo = HttpContext.Session.GetInt32("CartNo");
+        if (currentCartNo.HasValue && currentCartNo !=0)
+        {
+        int newCartNo = currentCartNo.Value - 1;
+        HttpContext.Session.SetInt32("CartNo", newCartNo);
+        }else{
+            HttpContext.Session.SetInt32("CartNo", 0);
+        }
+    
+        return RedirectToAction("MyCart");
+    }
+
+    [SessionCheck]
+    [HttpGet("cart/purchase")]
+    public IActionResult BuyFromCart()
+    {
+        List <Cart>? AllCarts = _context.Carts.Include(e=> e.Product).Include(e=> e.User).Where(e=> e.UserId == HttpContext.Session.GetInt32("UserId")).ToList();
+        foreach(Cart item in AllCarts){
+            item.User.Points += (item.Product.Price * item.Quantity)/10;
+            Purchase purchase = new Purchase ();
+            purchase.Quantity = item.Quantity;
+            purchase.Total = item.Product.Price * purchase.Quantity;
+            purchase.UserId = HttpContext.Session.GetInt32("UserId");
+            purchase.ProductId = item.ProductId;
+            _context.Purchases.Add(purchase);
+            _context.Carts.Remove(item);
+        }
+        _context.SaveChanges();
+        HttpContext.Session.SetInt32("CartNo", 0);
+        return RedirectToAction("MyCart");
+    }
+
+
+
+
+
 }
 
 

@@ -10,21 +10,22 @@
 <table class="table table-hover table-dark">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Product</th>
       <th scope="col"></th>
       <th scope="col">Quantity</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     @foreach(var item in Model){
     <tr>
-      <th scope="row">@item.CartId</th>
       <td>@item.Product.Name</td>
       <td><img src="~/uploads/@item.Product.ImageFileName" alt="item image" class="s-logo"></td>
       <td>@item.Quantity</td>
+      <td><a asp-action="RemoveFromCart" asp-route-id="@item.CartId" class="btn btn-outline-danger">Remove</a></td>
     </tr>
     }
   </tbody>
 </table>
 <h1>Your total is : @total</h1>
+<a asp-action="BuyFromCart" class="mt-4 btn btn-outline-success w-100 p-3">Complete Purchase</a>
