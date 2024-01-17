@@ -2,46 +2,46 @@
 <div class="d-flex justify-content-around">
 <div class="col-6">
     <div class="text-center">
-        <h2>Register a product</h2>
+        <h2 class="text-white">Register a product</h2>
     </div>
 
     <form asp-action="RegisterProduct" method="post" enctype="multipart/form-data" asp-controller="Admin">
 
         <div class="form-group">
-            <label asp-for="@Model.Product.Name"></label>
+            <label class="text-white" asp-for="@Model.Product.Name"></label>
             <input asp-for="@Model.Product.Name" class="form-control bg-black text-white" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
             <span asp-validation-for="@Model.Product.Name" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="@Model.Product.Brand"></label>
+            <label class="text-white" asp-for="@Model.Product.Brand"></label>
             <input asp-for="@Model.Product.Brand" class="form-control bg-black text-white" id="exampleInputEmail1"
                 aria-describedby="emailHelp" min="1">
             <span asp-validation-for="@Model.Product.Brand" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="@Model.Product.Price"></label>
+            <label class="text-white" asp-for="@Model.Product.Price"></label>
             <input asp-for="@Model.Product.Price" class="form-control bg-black text-white" id="exampleInputEmail1"
                 aria-describedby="emailHelp" min="1">
             <span asp-validation-for="@Model.Product.Price" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="@Model.Product.Quantity"></label>
+            <label class="text-white" asp-for="@Model.Product.Quantity"></label>
             <input asp-for="@Model.Product.Quantity" class="form-control bg-black text-white" id="exampleInputEmail1"
                 aria-describedby="emailHelp" min="1">
             <span asp-validation-for="@Model.Product.Quantity" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="@Model.Product.Description"></label>
+            <label class="text-white" asp-for="@Model.Product.Description"></label>
             <textarea class="form-control bg-black text-white" id="exampleFormControlTextarea1" rows="3"
                 asp-for="@Model.Product.Description"></textarea>
         </div>
         <div class="form-group">
-            <label asp-for="@Model.Product.ImageFile" class="control-label"></label>
+            <label class="text-white" asp-for="@Model.Product.ImageFile" class="control-label"></label>
             <input asp-for="@Model.Product.ImageFile" class="form-control bg-black text-white" type="file">
             <span asp-validation-for="@Model.Product.ImageFile" class="text-danger"></span>
         </div>
-        <label>Add A Category</label>
+        <label class="text-white">Add A Category</label>
         <select class="form-control bg-black text-white" asp-for="@Model.Product.CategoryId">
             @foreach (var item in @Model.Categories)
             {

@@ -5,7 +5,7 @@
         total+= item.Product.Price * item.Quantity;
     }
 }
-<h1 class="text-center">Check out your products</h1>
+<h1 class="text-center text-white">Check out your products</h1>
 
 <table class="table table-hover table-dark">
   <thead>
@@ -27,5 +27,5 @@
     }
   </tbody>
 </table>
-<h1>Your total is : @total</h1>
+<h1 class="text-white">Your total is : @total</h1>
 <a asp-action="BuyFromCart" class="mt-4 btn btn-outline-success w-100 p-3">Complete Purchase</a>

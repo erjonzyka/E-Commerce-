@@ -1,5 +1,5 @@
 ﻿function confirmPurchase(qty, event) {
-    // Prevent the default form submission behavior
+
     event.preventDefault();
 
     var inputQuantity = document.querySelector('#quantityInput');
@@ -16,7 +16,7 @@
             confirmButtonText: 'OK'
         });
 
-        // Set the input value to the available stock
+
         inputQuantity.value = qty;
     } else {
         Swal.fire({
@@ -29,7 +29,7 @@
             confirmButtonText: 'Yes, buy it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Delay the form submission until after Swal.fire is complete
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Order Confirmation!',
@@ -93,3 +93,6 @@ function updateCartQuantity() {
     // Update cartQuantity value when quantityInput changes
     cartQuantity.value = quantityInput.value;
 }
+
+
+

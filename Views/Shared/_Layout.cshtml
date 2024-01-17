@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ProjectNet.styles.css" asp-append-version="true" />
       <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     <header>
@@ -28,32 +29,29 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white display-7" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Shop">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                            <a class="nav-link text-white display-7" asp-area="" asp-controller="Home" asp-action="Shop">Shop</a>
                         </li>
                         @if(@HttpContextAccessor.HttpContext.Session.GetInt32("UserId")==null){
                             <li class="nav-item">
-                            <a class="btn btn-outline-secondary" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                            <a class="btn btn-outline-secondary display-7" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
                         </li>
                             }else{
                                 <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="MyProfile">My Account</a>
+                            <a class="nav-link text-white display-7" asp-area="" asp-controller="Home" asp-action="MyProfile">My Account</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="MyCart">My Shopping Cart <span class="cart-no">@HttpContextAccessor.HttpContext.Session.GetInt32("CartNo")</span></a>
+                            <a class="nav-link text-white display-7" asp-area="" asp-controller="Home" asp-action="MyCart">My Shopping Cart <span class="cart-no">@HttpContextAccessor.HttpContext.Session.GetInt32("CartNo")</span></a>
                         </li>
                                 @if(@HttpContextAccessor.HttpContext.Session.GetInt32("AdminId")!=null){
                                 <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Admin" asp-action="NewProduct">Add Product</a>
+                            <a class="nav-link text-white display-7" asp-area="" asp-controller="Admin" asp-action="NewProduct">Add Product</a>
                         </li>
                         }
                         <li class="nav-item">
-                            <a class="btn btn-outline-danger" asp-area="" asp-controller="Home" asp-action="LogOut">Log Out</a>
+                            <a class="btn btn-outline-danger display-7" asp-area="" asp-controller="Home" asp-action="LogOut">Log Out</a>
                         </li>
                             }
                     </ul>
@@ -69,9 +67,13 @@
         </main>
     </div>
     
+    @await Html.PartialAsync("_footer")
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+

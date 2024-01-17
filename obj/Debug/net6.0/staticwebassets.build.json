@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/wc69YHudp4qiKpMGQdC/rXDiY1YmDN1ti3YnAk2tqk=",
+  "Hash": "+thB0WSGm2M1+SIuX2NJ6p6oWPMIT3KsHb0E3+7lPSs=",
   "Source": "ProjectNet",
   "BasePath": "_content/ProjectNet",
   "Mode": "Default",
@@ -1528,6 +1528,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\85265d63-b024-4f16-a446-6032cb51224e_download.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\uploads\\8b3f1dc5-d471-44d8-9d77-65190c0fabd3_wireframe.jpg",
+      "SourceId": "ProjectNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\",
+      "BasePath": "_content/ProjectNet",
+      "RelativePath": "uploads/8b3f1dc5-d471-44d8-9d77-65190c0fabd3_wireframe.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\8b3f1dc5-d471-44d8-9d77-65190c0fabd3_wireframe.jpg"
     },
     {
       "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\Projekti\\ProjectNet\\wwwroot\\uploads\\8d3b217c-979e-4f7d-9ef8-97ada7e42e81_download.jpg",

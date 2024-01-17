@@ -1,13 +1,13 @@
 @model Category
 
 <div class="text-center">
-<h2>Add A Category</h2>
+<h2 class="text-white">Add A Category</h2>
 </div>
 
 <form asp-action="RegisterCategory" method="post">
 
     <div class="form-group">
-        <label asp-for="Name"></label>
+        <label asp-for="Name" class="text-white"></label>
         <input asp-for="Name" class="form-control bg-black text-white" id="exampleInputEmail1" aria-describedby="emailHelp"
             >
         <span asp-validation-for="Name" class="text-danger"></span>
