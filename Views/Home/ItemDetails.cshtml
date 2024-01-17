@@ -10,15 +10,16 @@
         <img class="card-img-top" src="~/uploads/@Model.Product.ImageFileName" alt="Card image cap">
     </div>
     <div class="col-5">
-        <h1 class="text-white">@Model.Product.Name</h1>
-        <h3 class="text-white">Price: @Model.Product.Price</h3>
-        <h3 class="text-white">Description: </h3>
+        <h1 class="text-white font-weight-bold">@Model.Product.Name</h1>
+        <h3 class="text-white font-weight-bold">By @Model.Product.Brand</h3>
+        <h3 class="text-white font-weight-bold">Price: @Model.Product.Price</h3>
+        <h3 class="text-white font-weight-bold">Description: </h3>
         <p class="text-white">@Model.Product.Description</p>
         <form asp-action="Purchase" method="post" asp-route-id="@Model.Product.ProductId" id="purchaseForm">
             <input type="hidden" value="@Model.Product.ProductId" asp-for="@Model.Purchase.ProductId">
             <input type="hidden" value="@HttpContextAccessor.HttpContext.Session.GetInt32("UserId")" asp-for="@Model.Purchase.UserId">
             <div class="form-group">
-                <label asp-for="@Model.Purchase.Quantity" class="text-white"></label>
+                <label asp-for="@Model.Purchase.Quantity" class="text-white font-weight-bold"></label>
                 <input asp-for="@Model.Purchase.Quantity" class="form-control bg-dark text-white" id="quantityInput" aria-describedby="emailHelp" min="1" onchange="updateCartQuantity()">
                 <span asp-validation-for="@Model.Purchase.Quantity" class="text-danger"></span>
             </div>

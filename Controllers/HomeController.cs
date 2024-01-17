@@ -43,7 +43,7 @@ public class HomeController : Controller
     [HttpGet("shop")]
 public IActionResult Shop(int page = 1)
 {
-    int pageSize = 10; 
+    int pageSize = 12; 
 
 
     List<Product> allProducts = _context.Products.Include(e => e.AllAssociations).ThenInclude(e => e.category).ToList();

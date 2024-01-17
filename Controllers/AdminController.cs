@@ -118,7 +118,9 @@ public IActionResult DeleteItem(int id)
     Product product = _context.Products.Include(e => e.AllAssociations).FirstOrDefault(e => e.ProductId == id);
     List<Association> associations = _context.Associations.Where(e => e.ProductId == id).ToList();
     List<Purchase> purchases = _context.Purchases.Where(p => p.ProductId == id).ToList();
+    List<Cart> carts = _context.Carts.Where(p => p.ProductId == id).ToList();
     _context.Purchases.RemoveRange(purchases);
+     _context.Carts.RemoveRange(carts);
     _context.Associations.RemoveRange(associations);
     
     _context.Products.Remove(product);

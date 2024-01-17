@@ -4,7 +4,6 @@
 <table class="table  table-dark table-hover">
     <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Item Name</th>
             <th scope="col">Image</th>
             <th scope="col">Item Brand</th>
@@ -20,7 +19,6 @@
         @foreach (var item in Model.Products)
         {
             <tr>
-                <th scope="row">@item.ProductId</th>
                 <td>@item.Name</td>
                 <td><img src="~/uploads/@item.ImageFileName" alt="item image" class="s-logo"></td>
                 <td>@item.Brand</td>
