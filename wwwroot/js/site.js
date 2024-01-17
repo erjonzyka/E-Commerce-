@@ -48,3 +48,36 @@
         });
     }
 }
+
+
+function confirmCart(qty, event) {
+    event.preventDefault();
+
+    var cartForm = document.getElementById('cartForm');
+    var cartQuantity = document.getElementById('cartQuantity');
+    var inputQuantity = document.getElementById('quantityInput');
+
+    // Parse the input value as an integer
+    var inputValue = parseInt(inputQuantity.value);
+
+    if (inputValue > qty) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Not Enough Stock!',
+            text: 'Sorry, the quantity you selected exceeds the available stock.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        });
+
+        inputQuantity.value = qty;
+        cartQuantity.value = qty;
+    } else {
+        cartQuantity.value = inputValue;
+
+        if (cartForm) {
+            cartForm.submit();
+        } else {
+            console.error('Form with ID "cartForm" not found.');
+        }
+    }
+}

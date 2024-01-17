@@ -24,6 +24,10 @@
             </div>
             <button type="button" class="mt-4 btn btn-success w-100 p-3" onclick="confirmPurchase(@Model.Product.Quantity,event)">Buy</button>
         </form>
+        <form asp-action="AddToCart" method="post" asp-route-id="@Model.Product.ProductId" id="cartForm">
+        <input type="hidden" asp-for="@Model.Cart.Quantity" id="cartQuantity">
+         <button type="button" class="mt-4 btn btn-outline-success w-100 p-3" onclick="confirmCart(@Model.Product.Quantity,event)">Add To Cart</button>
+        </form>
     </div>
 
 </div>

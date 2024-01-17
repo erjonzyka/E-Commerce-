@@ -1,0 +1,30 @@
+@model List<Cart>
+@{
+    int total = 0;
+    @foreach(var item in Model){
+        total+= item.Product.Price * item.Quantity;
+    }
+}
+<h1 class="text-center">Check out your products</h1>
+
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product</th>
+      <th scope="col"></th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var item in Model){
+    <tr>
+      <th scope="row">@item.CartId</th>
+      <td>@item.Product.Name</td>
+      <td><img src="~/uploads/@item.Product.ImageFileName" alt="item image" class="s-logo"></td>
+      <td>@item.Quantity</td>
+    </tr>
+    }
+  </tbody>
+</table>
+<h1>Your total is : @total</h1>

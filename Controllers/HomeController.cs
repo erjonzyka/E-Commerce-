@@ -70,86 +70,6 @@ public class HomeController : Controller
 
 
     
-
-
-
-
-    [HttpPost("product/addcategory/{id}")]
-    public IActionResult AddProductCategory(Association a, int id)
-    {
-        a.ProductId = id;
-        if (ModelState.IsValid)
-        {
-
-            bool associationExists = _context.Associations
-                .Any(assoc => assoc.ProductId == a.ProductId && assoc.CategoryId == a.CategoryId);
-
-            if (!associationExists)
-            {
-                _context.Add(a);
-                _context.SaveChanges();
-                return RedirectToAction("ProductDetails" ,new{id=id});
-            }
-            else
-            {
-                ModelState.AddModelError(nameof(a.CategoryId), "Category already added!");
-                ViewBag.product = _context.Products.Include(e => e.AllAssociations).ThenInclude(f => f.category).FirstOrDefault(s => s.ProductId == id);
-                ViewBag.Categories = _context.Categories.ToList();
-                return View("ProductDetails", a);
-            }
-        }
-        return View("ProductDetails", a);
-    }
-
-
-    
-
-    [HttpPost("category/addproduct/{id}")]
-    public IActionResult AddCategoryProduct(Association a, int id)
-    {
-        a.CategoryId = id;
-        if (ModelState.IsValid)
-        {
-
-            bool associationExists = _context.Associations
-                .Any(assoc => assoc.ProductId == a.ProductId && assoc.CategoryId == a.CategoryId);
-
-            if (!associationExists)
-            {
-                _context.Add(a);
-                _context.SaveChanges();
-                return RedirectToAction("CategoryDetails" ,new{id=id});
-            }
-            else
-            {
-                ModelState.AddModelError(nameof(a.ProductId), "Product already added!");
-                ViewBag.category = _context.Categories.Include(e => e.AllAssociations).ThenInclude(f => f.product).FirstOrDefault(s => s.CategoryId == id);
-                ViewBag.Products = _context.Products.ToList();
-                return View("CategoryDetails", a);
-            }
-
-        }
-        return View("CategoryDetails", a);
-    }
-
-
-    [HttpPost("Home/DestroyAssocP/{id}")]
-    public IActionResult DeleteAssocP(Association association, int id){
-        Association? ToDelete = _context.Associations.FirstOrDefault(e => e.ProductId==association.ProductId && e.CategoryId == association.CategoryId);
-        _context.Remove(ToDelete);
-        _context.SaveChanges();
-        return RedirectToAction("ProductDetails", new{id = id});
-    }
-
-
-       [HttpPost("Home/DestroyAssocC/{id}")]
-    public IActionResult DeleteAssocC(Association association, int id){
-        Association? ToDelete = _context.Associations.FirstOrDefault(e => e.ProductId==association.ProductId && e.CategoryId == association.CategoryId);
-        _context.Remove(ToDelete);
-        _context.SaveChanges();
-        return RedirectToAction("CategoryDetails", new{id = id});
-    }
-
     [SessionCheck]
     [HttpGet("item/details/{id}")]
     public IActionResult ItemDetails(int id)
@@ -167,6 +87,7 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    [SessionCheck]
     [HttpPost("Home/Purchase/{id}")]
     public IActionResult Purchase(Purchase purchase,int id){
         Product product = _context.Products.FirstOrDefault(e=> e.ProductId == id);
@@ -190,14 +111,44 @@ public class HomeController : Controller
         }
         return View();
     }
-
+    [SessionCheck]
     [HttpGet("myprofile")]
     public IActionResult MyProfile(){
         UserReg user = _context.Users.Include(e=> e.Purchases).ThenInclude(e=> e.Product).FirstOrDefault(e=> e.id == HttpContext.Session.GetInt32("UserId"));
         return View(user);
     }
+    [SessionCheck]
+    [HttpPost("addtocart/{id}")]
+    public IActionResult AddToCart(Cart newCart,int id)
+    {
+        newCart.ProductId = id;
+        newCart.UserId =  HttpContext.Session.GetInt32("UserId");
+        int? currentCartNo = HttpContext.Session.GetInt32("CartNo");
 
-    
+    if (currentCartNo.HasValue)
+    {
+    int newCartNo = currentCartNo.Value + 1;
+    HttpContext.Session.SetInt32("CartNo", newCartNo);
+    _context.Add(newCart);
+        _context.SaveChanges();
+        return RedirectToAction("ItemDetails", new{id=id});
+    }
+    else
+    {
+    HttpContext.Session.SetInt32("CartNo", 1);
+    }
+        _context.Add(newCart);
+        _context.SaveChanges();
+        return RedirectToAction("ItemDetails", new{id=id});
+    }
+
+    [SessionCheck]
+    [HttpGet("mycart")]
+    public IActionResult MyCart(){
+        List <Cart> MyCarts = _context.Carts.Include(e=> e.User).Include(e=> e.Product).Where(e=> e.UserId == HttpContext.Session.GetInt32("UserId")).OrderByDescending(e=> e.CartId).ToList();
+        return View(MyCarts);
+    }
+
 
 }
 

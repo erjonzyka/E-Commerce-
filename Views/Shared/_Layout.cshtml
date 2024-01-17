@@ -44,6 +44,9 @@
                                 <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="MyProfile">My Account</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="MyCart">My Shopping Cart <span class="cart-no">@HttpContextAccessor.HttpContext.Session.GetInt32("CartNo")</span></a>
+                        </li>
                                 @if(@HttpContextAccessor.HttpContext.Session.GetInt32("AdminId")!=null){
                                 <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Admin" asp-action="NewProduct">Add Product</a>

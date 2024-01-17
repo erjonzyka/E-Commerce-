@@ -60,7 +60,14 @@ h1{ color: white;}
 	border-radius-top: 20px;
 }
 
-
+.cart-no{
+  background-color: gray;
+  padding-left: 0.7em;
+  padding-right: 0.7em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-radius: 70%;
+}
 
 
 

@@ -10,6 +10,7 @@ public class DataOne{
     public List<Product> AllProducts {get;set;}
     public List<Category> AllCategories {get;set;}
     public Purchase? Purchase {get;set;}
+    public Cart? Cart {get;set;}
 
 
     public int CurrentPage { get; set; }

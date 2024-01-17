@@ -30,7 +30,7 @@ public class LoginController : Controller
    [HttpPost("login")]
     public IActionResult Login(UserLogin user){
         if(ModelState.IsValid){
-            UserReg? CurrentUser = _context.Users.FirstOrDefault(e => e.Email == user.LEmail);
+            UserReg? CurrentUser = _context.Users.Include(e=> e.Carts).FirstOrDefault(e => e.Email == user.LEmail);
             if(CurrentUser == null){
                 ModelState.AddModelError("LEmail", "Invalid Username/Password");
                 return View("Index");
@@ -49,6 +49,7 @@ public class LoginController : Controller
             }
             HttpContext.Session.SetInt32("UserId", CurrentUser.id);
             HttpContext.Session.SetString("UserName", CurrentUser.FirstName);
+            HttpContext.Session.SetInt32("CartNo", CurrentUser.Carts.Count);
             return  RedirectToAction("Index", "Home");
         }
         else{
@@ -69,6 +70,7 @@ public class LoginController : Controller
             _context.Add(user);
             _context.SaveChanges();
             HttpContext.Session.SetInt32("UserId", user.id);
+            HttpContext.Session.SetInt32("CartNo", 0);
             HttpContext.Session.SetString("UserName", user.FirstName);
             return RedirectToAction("Index", "Home");
         }
