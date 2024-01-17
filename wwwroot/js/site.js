@@ -59,6 +59,7 @@ function confirmCart(qty, event) {
 
     // Parse the input value as an integer
     var inputValue = parseInt(inputQuantity.value);
+    console.log("Sasia e inputit :" + inputValue);
 
     if (inputValue > qty) {
         Swal.fire({
@@ -72,12 +73,23 @@ function confirmCart(qty, event) {
         inputQuantity.value = qty;
         cartQuantity.value = qty;
     } else {
+        // Set the cartQuantity value
         cartQuantity.value = inputValue;
 
+        // Manually trigger the form submission
         if (cartForm) {
             cartForm.submit();
         } else {
             console.error('Form with ID "cartForm" not found.');
         }
     }
+}
+
+
+function updateCartQuantity() {
+    var cartQuantity = document.getElementById('cartQuantity');
+    var quantityInput = document.getElementById('quantityInput');
+    
+    // Update cartQuantity value when quantityInput changes
+    cartQuantity.value = quantityInput.value;
 }

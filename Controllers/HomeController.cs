@@ -109,7 +109,7 @@ public class HomeController : Controller
             return RedirectToAction("ItemDetails", new{id = id});
         }
         }
-        return View();
+        return View("ItemDetails",data);
     }
     [SessionCheck]
     [HttpGet("myprofile")]
@@ -119,10 +119,14 @@ public class HomeController : Controller
     }
     [SessionCheck]
     [HttpPost("addtocart/{id}")]
-    public IActionResult AddToCart(Cart newCart,int id)
+    public IActionResult AddToCart(DataOne data,int id)
     {
+        Product? product = _context.Products.FirstOrDefault(e=> e.ProductId == id);
+        Cart newCart = data.Cart;
+        product.Quantity -= newCart.Quantity;
         newCart.ProductId = id;
         newCart.UserId =  HttpContext.Session.GetInt32("UserId");
+        Console.WriteLine($"Sasia vjen sa : {newCart.Quantity}");
         int? currentCartNo = HttpContext.Session.GetInt32("CartNo");
 
     if (currentCartNo.HasValue)
